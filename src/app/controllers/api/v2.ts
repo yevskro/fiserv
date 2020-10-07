@@ -50,20 +50,20 @@ class Apiv2Controller {
   public static parseBody(req: Request, res: Response): Response {
     const { data } = req.body as ApiRequestBodyJSON;
     /* clear out the zeroes */
-    const firstName = Apiv2Controller.nameWithoutFillers(
+    const responseBody: ApiResponseBodyJSON = {};
+    responseBody.firstName = Apiv2Controller.nameWithoutFillers(
       data.slice(0, LengthOfString.FirstName)
     );
-    const lastName = Apiv2Controller.nameWithoutFillers(
+    responseBody.lastName = Apiv2Controller.nameWithoutFillers(
       data.slice(
         LengthOfString.FirstName,
         LengthOfString.FirstName + LengthOfString.LastName
       )
     );
     /* format the id */
-    const clientId = Apiv2Controller.formatClientId(
+    responseBody.clientId = Apiv2Controller.formatClientId(
       data.slice(LengthOfString.FirstName + LengthOfString.LastName)
     );
-    const responseBody: ApiResponseBodyJSON = { firstName, lastName, clientId };
     return res.status(200).send(responseBody);
   }
 }

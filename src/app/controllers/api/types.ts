@@ -18,7 +18,7 @@ export interface ApiRequestBodyJSON {
 }
 
 export interface ApiResponseBodyJSON {
-  firstName: string;
-  lastName: string;
-  clientId: string;
+  firstName?: string;
+  lastName?: string;
+  clientId?: string;
 }
