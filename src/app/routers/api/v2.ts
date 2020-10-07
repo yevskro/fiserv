@@ -5,7 +5,7 @@ class Apiv2Router {
   public router = express.Router();
 
   constructor() {
-    this.router.post('/', v2Controller.parseBody);
+    this.router.post('/parse', v2Controller.parseBody);
   }
 }
 

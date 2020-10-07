@@ -12,7 +12,7 @@ beforeAll(() => {
 
 test('v1 handles body request', async () => {
   const res = await supertest(app)
-    .post('/api/v1')
+    .post('/api/v1/parse')
     .set('Accept', 'application/json')
     .send(data);
 
@@ -26,7 +26,7 @@ test('v1 handles body request', async () => {
 
 test('v2 handles body request', async () => {
   const res = await supertest(app)
-    .post('/api/v2')
+    .post('/api/v2/parse')
     .set('Accept', 'application/json')
     .send(data);
 

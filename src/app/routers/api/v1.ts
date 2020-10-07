@@ -5,7 +5,7 @@ class Apiv1Router {
   public router = express.Router();
 
   constructor() {
-    this.router.post('/', v1Controller.parseBody);
+    this.router.post('/parse', v1Controller.parseBody);
   }
 }
 
