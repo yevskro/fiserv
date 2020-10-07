@@ -1,0 +1,40 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/node:12
+      
+    working_directory: ~/fiserv
+
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - pkg-v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - pkg-v1-dependencies-
+
+      - restore_cache:
+          keys:
+            - yarn-v1-lock-{{ checksum "yarn.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - yarn-v1-lock-
+
+      - run:
+          name: Installing dependencies
+          command: yarn install
+
+      - save_cache:
+          paths:
+            - yarn.lock
+          key: yarn-v1-lock-{{ checksum "yarn.lock" }}
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: pkg-v1-dependencies-{{ checksum "package.json" }}
+
+      - run:
+          name: Running tests
+          command: yarn test
