@@ -1,6 +1,6 @@
 import express, { NextFunction, Request, Response } from 'express';
 import { Server } from 'http';
-import ApiRouter from './routes/api';
+import ApiRouter from './routers/api';
 
 class App {
   public app: express.Application;
