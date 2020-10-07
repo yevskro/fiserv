@@ -41,8 +41,7 @@ class Apiv2Controller {
       999999-9999
       since there's no info on the format just going with the first
     */
-    let newClientId = '';
-    newClientId += id.slice(0, 3);
+    let newClientId = id.slice(0, 3);
     newClientId += '-';
     newClientId += id.slice(3, id.length);
     return newClientId;
