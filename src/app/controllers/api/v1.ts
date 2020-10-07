@@ -1,5 +1,9 @@
 import { Request, Response } from 'express';
-import { LengthOfString } from './types';
+import {
+  LengthOfString,
+  ApiRequestBodyJSON,
+  ApiResponseBodyJSON,
+} from './types';
 /* 
   the returned data from server holds a firstName and lastName 
   property both properties hold a string value that has a max length.
@@ -12,7 +16,7 @@ class Apiv1Controller {
   static parseBody(req: Request, res: Response): Response {
     /* based on the set length of string we can calculate how to
      slice the needed information */
-    const { data } = req.body;
+    const { data } = req.body as ApiRequestBodyJSON;
     const firstName = data.slice(0, LengthOfString.FirstName);
     const lastName = data.slice(
       LengthOfString.FirstName,
@@ -21,7 +25,8 @@ class Apiv1Controller {
     const clientId = data.slice(
       LengthOfString.FirstName + LengthOfString.LastName
     );
-    return res.status(200).send({ firstName, lastName, clientId });
+    const responseBody: ApiResponseBodyJSON = { firstName, lastName, clientId };
+    return res.status(200).send(responseBody);
   }
 }
 
