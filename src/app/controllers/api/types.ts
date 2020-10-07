@@ -10,3 +10,15 @@ export enum LengthOfString {
   FirstName = 8,
   LastName = 10,
 }
+
+/* interfaces for the data we should be receiving from the client
+  and the data we will be responding with to the client */
+export interface ApiRequestBodyJSON {
+  data: string;
+}
+
+export interface ApiResponseBodyJSON {
+  firstName: string;
+  lastName: string;
+  clientId: string;
+}
