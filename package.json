@@ -9,6 +9,7 @@
   "scripts": {
     "run-prod": "PORT=80 ts-node src/index",
     "run-dev": "PORT=3000 ts-node src/index",
+    "run-prod-docker": "PORT=80 IP=0.0.0.0 ts-node src/index",
     "test": "jest test"
   },
   "dependencies": {
