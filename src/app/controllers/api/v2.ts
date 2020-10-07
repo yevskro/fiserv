@@ -1,5 +1,9 @@
 import { Request, Response } from 'express';
-import { LengthOfString } from './types';
+import {
+  LengthOfString,
+  ApiRequestBodyJSON,
+  ApiResponseBodyJSON,
+} from './types';
 /* 
   the returned data from server holds a firstName and lastName 
   property both properties hold a string value that has a max length.
@@ -45,7 +49,7 @@ class Apiv2Controller {
   }
 
   public static parseBody(req: Request, res: Response): Response {
-    const { data } = req.body;
+    const { data } = req.body as ApiRequestBodyJSON;
     /* clear out the zeroes */
     const firstName = Apiv2Controller.nameWithoutFillers(
       data.slice(0, LengthOfString.FirstName)
@@ -60,8 +64,8 @@ class Apiv2Controller {
     const clientId = Apiv2Controller.formatClientId(
       data.slice(LengthOfString.FirstName + LengthOfString.LastName)
     );
-
-    return res.status(200).send({ firstName, lastName, clientId });
+    const responseBody: ApiResponseBodyJSON = { firstName, lastName, clientId };
+    return res.status(200).send(responseBody);
   }
 }
 
